@@ -1,4 +1,7 @@
-
+<?php 
+  //By having it in the header file, it will be included on every page, allowing session capability to be used on every page across the website.
+  include_once 'session.php' 
+?>
 
 <!doctype html>
 <html lang="en">
@@ -12,20 +15,31 @@
   <title>Attendance - <?php echo $title; ?></title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.php">IT Conference</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
+      <ul class="navbar-nav me-auto">
         <a class="nav-link" aria-current="page" href="index.php">Home</a>
         <a class="nav-link" href="viewrecords.php">View Attendees</a>
-        <a class="nav-link" href="#">Login</a>
-        <a class="nav-link" href="#">Logout</a>
+      </ul>
+
+      <div class="navbar-nav">
+        <?php  
+          if(!isset($_SESSION['userid'])) {
+        ?>
+          <a class="nav-link" href="login.php">Login</a>
+        <?php } else { ?>
+          <a class="nav-link" href="#">Hello <?php echo $_SESSION['username'] ?>!</a>
+          <a class="nav-link" href="logout.php">Logout</a>
+        <?php } ?>
       </div>
     </div>
   </div>
 </nav>
 <div class="container">
+
+
