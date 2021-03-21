@@ -3,6 +3,7 @@
 
   require_once 'includes/header.php';
   require_once 'db/conn.php';
+  require_once 'sendemail.php';
 
   if(isset($_POST['submit'])){
     $fname = $_POST['firstname'];
@@ -12,9 +13,13 @@
     $phone = $_POST['phone'];
     $specialty = $_POST['specialty'];
 
+    // register attendee 
     $isSuccess = $crud->insertAttendees($fname, $lname, $dob, $email, $phone, $specialty);
+    $specialtyName = $crud->getSpecialtyById($specialty);
 
+    // send confirmation email to attendee
     if($isSuccess) {
+      SendEmail::SendMail($email, 'Welcome to IT Conference', 'You have successfully registered for the IT Conference');
       include 'includes/successmessage.php';
     } else {
       include 'includes/errormessage.php';
@@ -30,7 +35,7 @@
       <?php echo $_POST['firstname'] . ' ' . $_POST['lastname']; ?>
     </h5>
     <h6 class="card-subtitle mb-2 text-muted">
-      <?php echo $_POST['specialty']; ?>
+      <?php echo $specialtyName['name'] ?>
     </h6>
     <p class="card-text">
       Date of Birth: <?php echo $_POST['dob']; ?>
