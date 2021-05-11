@@ -24,5 +24,5 @@
   $user = new user($pdo);
 
   //$user->insertUser("charlesloehle@gmail.com", "charlesloehle", "charles123");
-  $user->insertUser("admin@attendance-app.com", "admin", "admin123");
+  //$user->insertUser("admin@attendance-app.com", "admin", "admin123");
 ?>
